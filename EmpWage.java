@@ -1,12 +1,19 @@
 public class EmpWage{
 
+	public static final int isFullTime=1;
+	public static final int wagePerHour=20;
+
 	public static void main(String[] args){
 
-		int isFullTime=1;
+		int empHours=0;
+		int empWage=0;
+		
 		int empCheck=(int)Math.floor(Math.random()*10)%2;
 		if (empCheck==isFullTime)
-			System.out.println("Employee is Present");
+			empHours=8;
 		else
-			System.out.println("Employee is Absent");
+			empHours=0;
+		empWage=empHours*wagePerHour;
+		System.out.println("Employee Wage : "+empWage);
 	}
 }

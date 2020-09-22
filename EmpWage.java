@@ -1,6 +1,7 @@
 public class EmpWage{
 
 	public static final int isFullTime=1;
+	public static final int isPartTime=2;
 	public static final int wagePerHour=20;
 
 	public static void main(String[] args){
@@ -8,9 +9,11 @@ public class EmpWage{
 		int empHours=0;
 		int empWage=0;
 		
-		int empCheck=(int)Math.floor(Math.random()*10)%2;
+		int empCheck=(int)Math.floor(Math.random()*10)%3;
 		if (empCheck==isFullTime)
 			empHours=8;
+		else if(empCheck==isPartTime)
+			empHours=4;
 		else
 			empHours=0;
 		empWage=empHours*wagePerHour;

@@ -5,7 +5,19 @@ public class EmpWageBuilder{
 	public static final int isFullTime=1;
 	public static final int isPartTime=2;
 	
-	public static void calculateEmpWage(String companyName, int wagePerHour,int maxWorkingDays,int maxHours) {
+	public final String companyName;
+	public final int wagePerHour;
+	public final int maxWorkingDays;
+	public final int maxHours;
+	
+	public EmpWageBuilder(String companyName, int wagePerHour, int maxWorkingDays, int maxHours) {
+		super();
+		this.companyName = companyName;
+		this.wagePerHour = wagePerHour;
+		this.maxWorkingDays = maxWorkingDays;
+		this.maxHours = maxHours;
+	}
+	public void calculateEmpWage() {
 		int empHours=0;
 		int totalEmpHours=0;
 		int totalWorkingDays=0;
@@ -31,8 +43,10 @@ public class EmpWageBuilder{
 	}
 	public static void main(String[] args){
 
-		calculateEmpWage("V Mart",20,15,80);
-		calculateEmpWage("Reliance",15,18,100);
+		EmpWageBuilder vMart=new EmpWageBuilder("V Mart",20,15,80);
+		EmpWageBuilder reliance=new EmpWageBuilder("Reliance",15,18,100);
+		vMart.calculateEmpWage();
+		reliance.calculateEmpWage();		
 		
 	}
 }

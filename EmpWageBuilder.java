@@ -1,4 +1,4 @@
-public class EmpWage{
+public class EmpWageBuilder{
 
 	public static final int isFullTime=1;
 	public static final int isPartTime=2;
@@ -6,8 +6,7 @@ public class EmpWage{
 	public static final int maxWorkingDays=20;
 	public static final int maxHours=100;
 
-	public static void main(String[] args){
-
+	public static int calculateEmpWage() {
 		int empHours=0;
 		int totalEmpHours=0;
 		int totalWorkingDays=0;
@@ -29,6 +28,11 @@ public class EmpWage{
 			System.out.println("Day : "+totalWorkingDays+" Employee Hours : "+empHours);
 		}
 		totalEmpWage+=totalEmpHours*wagePerHour;
+		return  totalEmpWage;
+	}
+	public static void main(String[] args){
+
+		int totalEmpWage=calculateEmpWage();
 		System.out.println("Total Employee Wage : "+totalEmpWage);
 	}
 }

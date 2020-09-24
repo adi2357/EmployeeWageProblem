@@ -1,12 +1,11 @@
+
+
 public class EmpWageBuilder{
 
 	public static final int isFullTime=1;
 	public static final int isPartTime=2;
-	public static final int wagePerHour=20;
-	public static final int maxWorkingDays=20;
-	public static final int maxHours=100;
-
-	public static int calculateEmpWage() {
+	
+	public static void calculateEmpWage(String companyName, int wagePerHour,int maxWorkingDays,int maxHours) {
 		int empHours=0;
 		int totalEmpHours=0;
 		int totalWorkingDays=0;
@@ -28,11 +27,12 @@ public class EmpWageBuilder{
 			System.out.println("Day : "+totalWorkingDays+" Employee Hours : "+empHours);
 		}
 		totalEmpWage+=totalEmpHours*wagePerHour;
-		return  totalEmpWage;
+		System.out.println("Total Employee Wage for Comapny :  "+companyName +" is : "+totalEmpWage);
 	}
 	public static void main(String[] args){
 
-		int totalEmpWage=calculateEmpWage();
-		System.out.println("Total Employee Wage : "+totalEmpWage);
+		calculateEmpWage("V Mart",20,15,80);
+		calculateEmpWage("Reliance",15,18,100);
+		
 	}
 }

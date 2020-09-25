@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class EmpWageBuilder{
+public class EmpWageBuilder implements CompanyEmpManagement{
 
 	public static final int isFullTime=1;
 	public static final int isPartTime=2;
@@ -15,10 +15,15 @@ public class EmpWageBuilder{
 	public void addCompanyEmpWage(CompanyEmpWage company) {
 		companyEmpWageArray.add(company);
 	}
-	private void computeEmpWage() {
+	public void computeEmpWage() {
 		for(int i=0; i<companyEmpWageArray.size(); i++) {
 			companyEmpWageArray.get(i).setTotalEmpWage(this.computeEmpWage(companyEmpWageArray.get(i)));
 		}
+	}
+	public void computeDailyEmpWage(CompanyEmpWage company,int empHours, int workingDay) {
+		
+		int dailyEmpWage=empHours*company.wagePerHour;
+		System.out.println("Day : "+workingDay+" Wage : "+dailyEmpWage);
 	}
 	
 	public int computeEmpWage(CompanyEmpWage companyEmpWage) {
@@ -40,7 +45,8 @@ public class EmpWageBuilder{
 				empHours=0;
 			}
 			totalEmpHours+=empHours;
-			System.out.println("Day : "+totalWorkingDays+" Employee Hours : "+empHours);
+			computeDailyEmpWage(companyEmpWage, empHours, totalWorkingDays);
+			
 		}
 		totalEmpWage+=totalEmpHours*companyEmpWage.wagePerHour;
 		System.out.println("Total Employee Wage for Comapny :  "+companyEmpWage.companyName +" is : "+totalEmpWage);

@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class EmpWageBuilder implements CompanyEmpManagement{
 
@@ -7,23 +9,25 @@ public class EmpWageBuilder implements CompanyEmpManagement{
 	
 	
 	private ArrayList<CompanyEmpWage> companyEmpWageArray;
+	private Map<String,CompanyEmpWage> companyToEmployeeMap;
 	
 	
 	public EmpWageBuilder() {
 		companyEmpWageArray=new ArrayList<CompanyEmpWage>();
+		companyToEmployeeMap=new HashMap<>();
 	}
 	public void addCompanyEmpWage(CompanyEmpWage company) {
 		companyEmpWageArray.add(company);
+		companyToEmployeeMap.put(company.companyName, company);
 	}
 	public void computeEmpWage() {
 		for(int i=0; i<companyEmpWageArray.size(); i++) {
 			companyEmpWageArray.get(i).setTotalEmpWage(this.computeEmpWage(companyEmpWageArray.get(i)));
 		}
 	}
-	public void computeDailyEmpWage(CompanyEmpWage company,int empHours, int workingDay) {
-		
-		int dailyEmpWage=empHours*company.wagePerHour;
-		System.out.println("Day : "+workingDay+" Wage : "+dailyEmpWage);
+	
+	public int getTotalWage(String company) {
+		return companyToEmployeeMap.get(company).totalEmpWage;
 	}
 	
 	public int computeEmpWage(CompanyEmpWage companyEmpWage) {
@@ -45,11 +49,9 @@ public class EmpWageBuilder implements CompanyEmpManagement{
 				empHours=0;
 			}
 			totalEmpHours+=empHours;
-			computeDailyEmpWage(companyEmpWage, empHours, totalWorkingDays);
 			
 		}
 		totalEmpWage+=totalEmpHours*companyEmpWage.wagePerHour;
-		System.out.println("Total Employee Wage for Comapny :  "+companyEmpWage.companyName +" is : "+totalEmpWage);
 		return totalEmpWage;
 	}
 	public static void main(String[] args){
@@ -59,7 +61,10 @@ public class EmpWageBuilder implements CompanyEmpManagement{
 		CompanyEmpWage infosys=new CompanyEmpWage("Infosys",15,18,100);
 		empBuilderObject.addCompanyEmpWage(vMart);
 		empBuilderObject.addCompanyEmpWage(infosys);
-		empBuilderObject.computeEmpWage();		
+		empBuilderObject.computeEmpWage();
+		System.out.println("Total Wage for V Mart Company is : "+ empBuilderObject.getTotalWage(vMart.companyName));
+		System.out.println("Total Wage for Infosys Company is : "+ empBuilderObject.getTotalWage(infosys.companyName));
+
 		
 	}
 }

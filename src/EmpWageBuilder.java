@@ -1,6 +1,6 @@
 
 
-public class EmpWageBuilder{
+public class EmpWageBuilder implements CompanyEmpManagement{
 
 	public static final int isFullTime=1;
 	public static final int isPartTime=2;
@@ -16,7 +16,7 @@ public class EmpWageBuilder{
 		companyEmpWageArray[numOfCompany] = new CompanyEmpWage(companyName, wagePerHour, maxWorkingDays, maxHours);
 		numOfCompany++;
 	}
-	private void computeEmpWage() {
+	public void computeEmpWage() {
 		for(int i=0; i<numOfCompany; i++) {
 			companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
 		}

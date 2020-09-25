@@ -1,24 +1,23 @@
-
+import java.util.ArrayList;
 
 public class EmpWageBuilder{
 
 	public static final int isFullTime=1;
 	public static final int isPartTime=2;
 	
-	private int numOfCompany=0;
-	private CompanyEmpWage[] companyEmpWageArray;
+	
+	private ArrayList<CompanyEmpWage> companyEmpWageArray;
 	
 	
 	public EmpWageBuilder() {
-		companyEmpWageArray=new CompanyEmpWage[5];
+		companyEmpWageArray=new ArrayList<CompanyEmpWage>();
 	}
-	public void addCompanyEmpWage(String companyName, int wagePerHour, int maxWorkingDays, int maxHours) {
-		companyEmpWageArray[numOfCompany] = new CompanyEmpWage(companyName, wagePerHour, maxWorkingDays, maxHours);
-		numOfCompany++;
+	public void addCompanyEmpWage(CompanyEmpWage company) {
+		companyEmpWageArray.add(company);
 	}
 	private void computeEmpWage() {
-		for(int i=0; i<numOfCompany; i++) {
-			companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
+		for(int i=0; i<companyEmpWageArray.size(); i++) {
+			companyEmpWageArray.get(i).setTotalEmpWage(this.computeEmpWage(companyEmpWageArray.get(i)));
 		}
 	}
 	
@@ -50,8 +49,10 @@ public class EmpWageBuilder{
 	public static void main(String[] args){
 
 		EmpWageBuilder empBuilderObject=new EmpWageBuilder();
-		empBuilderObject.addCompanyEmpWage("V Mart",20,15,80);
-		empBuilderObject.addCompanyEmpWage("Reliance",15,18,100);
+		CompanyEmpWage vMart=new CompanyEmpWage("V Mart",20,15,80);
+		CompanyEmpWage infosys=new CompanyEmpWage("Infosys",15,18,100);
+		empBuilderObject.addCompanyEmpWage(vMart);
+		empBuilderObject.addCompanyEmpWage(infosys);
 		empBuilderObject.computeEmpWage();		
 		
 	}
